@@ -1,0 +1,154 @@
+/* Base Styles */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* Header & Footer */
+header, footer {
+  background-color: #fff;
+  padding: 15px 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 100;
+}
+
+/* Page Content for About, Privacy, etc. */
+.page-content {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: left;
+  line-height: 1.6;
+}
+
+/* Main Content Area */
+main {
+  padding: 20px 15px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Converter Button Group */
+.converter-buttons {
+  margin: 20px 0;
+}
+
+.converter-buttons button {
+  margin: 6px;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+  background-color: #eee;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+}
+
+.converter-buttons button:hover {
+  background-color: #ddd;
+}
+
+/* Active Converter Button */
+.converter-buttons button.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+/* Hidden Elements */
+.hidden {
+  display: none;
+}
+
+/* Ad Container */
+.ad-container {
+  margin: 20px auto;
+  text-align: center;
+  width: 100%;
+  max-width: 728px;
+  min-height: 90px;
+  overflow: hidden; /* This hides content that overflows the container */
+}
+
+.ad-container iframe,
+.ad-container img {
+  width: 100% !important; /* Forces the ad content to fill the container */
+  height: auto !important;
+  max-width: 728px;
+  margin: 0 auto;
+}
+
+/* Form & Input Fields */
+form {
+  margin-top: 20px;
+}
+
+form input[type="file"],
+form input[type="text"],
+form select {
+  padding: 10px;
+  margin: 10px;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form button[type="submit"] {
+  padding: 12px 30px;
+  font-size: 16px;
+  background-color: #28a745;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button[type="submit"]:hover {
+  background-color: #218838;
+}
+
+/* Loading Message */
+#loading {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+/* Footer Links */
+footer a {
+  color: #007bff;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  form input[type="file"],
+  form input[type="text"],
+  form select {
+    width: 90%;
+  }
+
+  .converter-buttons button {
+    width: 90%;
+    font-size: 15px;
+  }
+
+  .ad-container {
+    width: 100%;
+    padding: 0 10px;
+  }
+}

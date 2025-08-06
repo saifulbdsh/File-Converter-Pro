@@ -1,0 +1,8 @@
+# Python cache files
+__pycache__/
+
+# Virtual environment directory
+venv/
+
+# Temporary files created by the app
+uploads/

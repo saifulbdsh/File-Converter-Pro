@@ -45,10 +45,10 @@
 
   <main>
     <div class="converter-buttons">
-      <button onclick="switchConverter('document')" data-converter="document" class="active">📄 Document</button>
-      <button onclick="switchConverter('image')" data-converter="image">🖼️ Image</button>
-      <button onclick="switchConverter('video')" data-converter="video">🎞️ Video</button>
-      <button onclick="switchConverter('audio')" data-converter="audio">🎧 Audio</button>
+      <button data-converter="document" class="active">📄 Document</button>
+      <button data-converter="image">🖼️ Image</button>
+      <button data-converter="video">🎞️ Video</button>
+      <button data-converter="audio">🎧 Audio</button>
     </div>
 
     <form id="convertForm" action="/convert/document" method="POST" enctype="multipart/form-data">
@@ -62,10 +62,6 @@
 
       <label for="output_format">Convert to:</label>
       <select name="output_format" id="outputFormatSelect" required>
-        <option value="pdf">PDF</option>
-        <option value="docx">DOCX</option>
-        <option value="txt">TXT</option>
-        <option value="pptx">PPTX</option>
       </select>
 
       <br />
@@ -91,39 +87,7 @@
     </p>
     <p>&copy; {{ year }} File Converter Pro. All rights reserved.</p>
   </footer>
-
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
   
-  <script>
-    const form = document.getElementById("convertForm");
-    const outputSelect = document.getElementById("outputFormatSelect");
-    const converterButtons = document.querySelectorAll(".converter-buttons button");
-
-    const converterOptions = {
-        document: ["pdf", "docx", "txt", "pptx"],
-        image: ["jpg", "png", "webp"],
-        video: ["mp4", "avi", "mov"],
-        audio: ["mp3", "wav", "ogg"]
-    };
-
-    function switchConverter(type) {
-        converterButtons.forEach(btn => btn.classList.remove("active"));
-        document.querySelector(`[data-converter="${type}"]`).classList.add("active");
-
-        form.action = `/convert/${type}`;
-        outputSelect.innerHTML = "";
-        
-        converterOptions[type].forEach(format => {
-            const option = document.createElement("option");
-            option.value = format;
-            option.textContent = format.toUpperCase();
-            outputSelect.appendChild(option);
-        });
-    }
-
-    form.addEventListener("submit", function () {
-        document.getElementById("loading").classList.remove("hidden");
-    });
-  </script>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

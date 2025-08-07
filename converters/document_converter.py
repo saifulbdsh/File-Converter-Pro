@@ -1,12 +1,8 @@
 import os
 import tempfile
 from werkzeug.utils import secure_filename
-from PyPDF2 import PdfReader
 from docx import Document
-from pptx import Presentation
-
-from pdf2docx import Converter as PDF2DOCXConverter
-from docx2pdf import convert as docx_to_pdf
+from PyPDF2 import PdfReader
 
 ALLOWED_DOCUMENT_EXTENSIONS = {'pdf', 'docx', 'txt', 'pptx'}
 
@@ -23,24 +19,14 @@ def convert_document(file, input_format, output_format):
     output_path = os.path.join(tempfile.gettempdir(), output_filename)
 
     try:
-        # PDF → DOCX
-        if input_format == "pdf" and output_format == "docx":
-            cv = PDF2DOCXConverter(input_path)
-            cv.convert(output_path)
-            cv.close()
-
-        # DOCX → PDF
-        elif input_format == "docx" and output_format == "pdf":
-            docx_to_pdf(input_path, output_path)
-
-        # DOCX → TXT
-        elif input_format == "docx" and output_format == "txt":
+        # DOCX -> TXT
+        if input_format == "docx" and output_format == "txt":
             doc = Document(input_path)
             text = '\n'.join([para.text for para in doc.paragraphs])
             with open(output_path, 'w', encoding='utf-8') as f:
                 f.write(text)
 
-        # TXT → DOCX
+        # TXT -> DOCX
         elif input_format == "txt" and output_format == "docx":
             with open(input_path, 'r', encoding='utf-8') as f:
                 lines = f.readlines()
@@ -48,8 +34,8 @@ def convert_document(file, input_format, output_format):
             for line in lines:
                 doc.add_paragraph(line.strip())
             doc.save(output_path)
-
-        # PDF → TXT
+        
+        # PDF -> TXT
         elif input_format == "pdf" and output_format == "txt":
             reader = PdfReader(input_path)
             text = ''
@@ -58,19 +44,11 @@ def convert_document(file, input_format, output_format):
             with open(output_path, 'w', encoding='utf-8') as f:
                 f.write(text)
 
-        # PPTX → PDF or TXT (simple extract)
-        elif input_format == "pptx" and output_format == "txt":
-            prs = Presentation(input_path)
-            text = ''
-            for slide in prs.slides:
-                for shape in slide.shapes:
-                    if hasattr(shape, "text"):
-                        text += shape.text + '\n'
-            with open(output_path, 'w', encoding='utf-8') as f:
-                f.write(text)
+        # The following conversions are no longer supported due to dependency issues
+        # PDF -> DOCX, DOCX -> PDF, PPTX -> PDF
         else:
-            return None, "Unsupported conversion."
-        
+            return None, "Unsupported conversion. We have temporarily removed this feature to fix a server issue."
+
         return output_path, None
     except Exception as e:
         return None, str(e)

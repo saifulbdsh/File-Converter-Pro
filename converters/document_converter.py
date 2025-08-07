@@ -19,14 +19,12 @@ def convert_document(file, input_format, output_format):
     output_path = os.path.join(tempfile.gettempdir(), output_filename)
 
     try:
-        # DOCX -> TXT
         if input_format == "docx" and output_format == "txt":
             doc = Document(input_path)
             text = '\n'.join([para.text for para in doc.paragraphs])
             with open(output_path, 'w', encoding='utf-8') as f:
                 f.write(text)
 
-        # TXT -> DOCX
         elif input_format == "txt" and output_format == "docx":
             with open(input_path, 'r', encoding='utf-8') as f:
                 lines = f.readlines()
@@ -35,7 +33,6 @@ def convert_document(file, input_format, output_format):
                 doc.add_paragraph(line.strip())
             doc.save(output_path)
         
-        # PDF -> TXT
         elif input_format == "pdf" and output_format == "txt":
             reader = PdfReader(input_path)
             text = ''
@@ -44,10 +41,8 @@ def convert_document(file, input_format, output_format):
             with open(output_path, 'w', encoding='utf-8') as f:
                 f.write(text)
 
-        # The following conversions are no longer supported due to dependency issues
-        # PDF -> DOCX, DOCX -> PDF, PPTX -> PDF
         else:
-            return None, "Unsupported conversion. We have temporarily removed this feature to fix a server issue."
+            return None, "Unsupported conversion. This feature is temporarily disabled to fix a server issue."
 
         return output_path, None
     except Exception as e:

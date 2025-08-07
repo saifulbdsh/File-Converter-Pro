@@ -1,8 +1,33 @@
-# Python cache files
+# Byte-compiled / optimized / DLL files
 __pycache__/
+*.py[cod]
+*$py.class
 
-# Virtual environment directory
+# Virtual environment
 venv/
+.env
+.env.*
 
-# Temporary files created by the app
+# VSCode or IDE settings (optional)
+.vscode/
+.idea/
+
+# Flask cache / temp files
+instance/
 uploads/
+*.log
+
+# macOS system files
+.DS_Store
+
+# PyInstaller
+dist/
+build/
+*.spec
+
+# Node modules (if any frontend libs are added)
+node_modules/
+
+# SQLite or local DB files (if used)
+*.sqlite3
+*.db
